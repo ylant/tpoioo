@@ -1,2 +1,4 @@
 # tpoioo
-(como se nota que no cree un git en la puta vida)
+si no funca avisen
+saludos
+cosme fulanito
