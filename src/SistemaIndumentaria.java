@@ -39,7 +39,10 @@ public class SistemaIndumentaria
 		prendas = new Vector<Prenda>();
 		materiales = new Vector<Material>();
 		proveedores = new Vector<Proveedor>();
-
+		//nuevo de claudio
+		materialesAPedir = new Vector<Material>();
+		
+		
 		cargaInicial();
 		
 	}
@@ -133,6 +136,32 @@ public class SistemaIndumentaria
 		return nuevaFactura;
 	}
 	
+	
+	
+	//nuevo claudio
+	//NUEVO CLAUDIO - GENERAR OC	
+	
+		public void chequearPtoPedido(){
+			
+			Vector<Material> materialesAux;
+			materialesAux = new Vector<Material>();
+			
+			if(this.buscarMaterialesAPedir() != null){
+				
+				for(int j = 0; j < materialesAPedir.size(); j++){
+					
+					
+					
+				}
+				
+				//this.generarOC(materialesAPedir){
+					
+					
+					
+					
+				}
+				
+			}
 	
 	
 }
