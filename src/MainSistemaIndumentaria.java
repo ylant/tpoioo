@@ -133,7 +133,7 @@ public class MainSistemaIndumentaria
 		System.out.println("-------------------------------------------------------");
 		System.out.println("1.- Prenda de Verano");
 		System.out.println("2.- Prenda de Invierno");
-		System.out.println("3.- Prenda de Otoño");
+		System.out.println("3.- Prenda de Otoï¿½o");
 		System.out.println("4.- Prenda de Primavera");
 		System.out.println("5.- Prenda sin Temporada");
 		System.out.println("9.- Salir");
@@ -332,6 +332,8 @@ public class MainSistemaIndumentaria
 				e.printStackTrace();
 			}
 		}
+		
+		//sistemaindumentaria.ControlarStockMateriales();
 		
 		return true;
 	}

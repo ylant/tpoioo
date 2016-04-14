@@ -6,7 +6,7 @@ public class Prenda
 	protected String nombrePrenda;
 	protected int stockPrenda;
 	protected float precioPrenda;
-	protected  Vector<ItemPrenda>itemsprendas;
+	protected Vector<ItemPrenda>itemsprendas;
 	
 
 	public Prenda(int codigoPrenda, String nombrePrenda, int stockPrenda, 

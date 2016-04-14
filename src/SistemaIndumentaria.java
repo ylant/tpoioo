@@ -85,6 +85,40 @@ public class SistemaIndumentaria
 		return devolucionPrenda;
 	}
 	
+	public void ControlarStockMateriales()
+	{
+		System.out.println("Here");
+		for (int i = 0; i < materiales.size(); i++) {
+			Material mat = materiales.elementAt(i);
+			if(mat.getCantStock() <= mat.getPuntoDeReposicion())
+			{
+				materialesAPedir.add(mat);
+			}
+		}
+		System.out.println(materialesAPedir);
+		if(materialesAPedir.size()>0)
+		{
+			Vector<Material>aux;
+			aux = new Vector<Material>();
+			boolean flag = true;
+			while(flag)
+			{
+				for (int i = 0; i < materialesAPedir.size(); i++) 
+				{
+					System.out.println(materialesAPedir);
+					Material mat = materiales.elementAt(i);
+					if(i == 0 || mat.getProveedor().getCodigoProveedor() == aux.elementAt(0).getProveedor().getCodigoProveedor())
+					{
+						//aux.add(mat);
+						materialesAPedir.removeElementAt(i);
+						System.out.println(materialesAPedir);
+						System.out.println(mat.getCodigoMaterial());
+					}
+				}
+				flag = false;
+			}
+		}
+	}
 	
 	public Prenda buscarPrenda(int cod)
 	{
@@ -141,7 +175,7 @@ public class SistemaIndumentaria
 	
 	//nuevo claudio
 	//NUEVO CLAUDIO - GENERAR OC	
-	
+	/*
 		public void chequearPtoPedido(){
 			
 			Vector<Material> materialesAux;
@@ -163,6 +197,6 @@ public class SistemaIndumentaria
 				}
 				
 			}
-	
+	*/
 	
 }
