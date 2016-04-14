@@ -8,7 +8,8 @@ public class SistemaIndumentaria
 	private Vector<Prenda>prendas;
 	private Vector<Material>materiales;
 	private Vector<Proveedor>proveedores;
-	
+	//Nuevo Claudio GenerarOC
+	private Vector<Material>materialesAPedir;
 	private int contadorFactura=0;
 	
 	private void cargaInicial()
