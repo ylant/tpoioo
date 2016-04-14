@@ -8,7 +8,8 @@ public class SistemaIndumentaria
 	private Vector<Prenda>prendas;
 	private Vector<Material>materiales;
 	private Vector<Proveedor>proveedores;
-
+	
+	private int contadorFactura=0;
 	
 	private void cargaInicial()
 	{
@@ -24,9 +25,12 @@ public class SistemaIndumentaria
 
 
 		PrendaSinTemporada prenda_sin_temporada3 = new PrendaSinTemporada(20, "pantalon1", 10, material1, 20);
+		prenda_sin_temporada3.setPrecioPrenda(200);
 		prendas.add(prenda_sin_temporada3);
 		
 		PrendaSinTemporada prenda_sin_temporada2 = new PrendaSinTemporada(10, "pantalon2", 10, material2, 10);
+		prenda_sin_temporada2.setPrecioPrenda(400);
+
 		prendas.add(prenda_sin_temporada2);
 	}
 	
@@ -121,6 +125,14 @@ public class SistemaIndumentaria
 		prendainstanciada.setCodigoPrenda(prendainstanciada.getCodigoPrenda() * -1);
 		return true;
 	}
+	
+	public Factura generarFactura(int nroFactura, String fecha, String nombreCliente)
+	{
+		this.contadorFactura = this.contadorFactura + 1;
+		Factura nuevaFactura = new Factura(this.contadorFactura, fecha, nombreCliente);
+		return nuevaFactura;
+	}
+	
 	
 	
 }

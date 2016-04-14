@@ -63,6 +63,16 @@ public class Prenda
 		this.itemsprendas.add(itemprenda);
 	}
 	
+	public float getPrecioPrenda() {
+		return precioPrenda;
+	}
+
+
+	public void setPrecioPrenda(float precioPrenda) {
+		this.precioPrenda = precioPrenda;
+	}
+
+
 	public void calcularPrecio()
 	{
 		float total=0;
