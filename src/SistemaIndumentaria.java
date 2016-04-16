@@ -1,6 +1,3 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Scanner;
 import java.util.Vector;
 
 public class SistemaIndumentaria 
@@ -8,8 +5,8 @@ public class SistemaIndumentaria
 	private Vector<Prenda>prendas;
 	private Vector<Material>materiales;
 	private Vector<Proveedor>proveedores;
-	//Nuevo Claudio GenerarOC
 	private Vector<Material>materialesAPedir;
+	private Vector<ordenDeCompra>ordenesDeCompra;
 	private int contadorFactura=0;
 	
 	private void cargaInicial()
@@ -24,12 +21,11 @@ public class SistemaIndumentaria
 		materiales.add(material1);
 		materiales.add(material2);
 
-
-		PrendaSinTemporada prenda_sin_temporada3 = new PrendaSinTemporada(20, "pantalon1", 10, material1, 20);
+		Prenda prenda_sin_temporada3 = this.AltaPrendaSinTemporada(20, "pantalon1", 10, material1, 65);
 		prenda_sin_temporada3.setPrecioPrenda(200);
 		prendas.add(prenda_sin_temporada3);
 		
-		PrendaSinTemporada prenda_sin_temporada2 = new PrendaSinTemporada(10, "pantalon2", 10, material2, 10);
+		Prenda prenda_sin_temporada2 = this.AltaPrendaSinTemporada(10, "pantalon2", 10, material2, 75);
 		prenda_sin_temporada2.setPrecioPrenda(400);
 
 		prendas.add(prenda_sin_temporada2);
@@ -40,12 +36,9 @@ public class SistemaIndumentaria
 		prendas = new Vector<Prenda>();
 		materiales = new Vector<Material>();
 		proveedores = new Vector<Proveedor>();
-		//nuevo de claudio
 		materialesAPedir = new Vector<Material>();
-		
-		
+		ordenesDeCompra = new Vector<ordenDeCompra>();
 		cargaInicial();
-		
 	}
 	
 	public Prenda AltaPrendaSinTemporada(int codigo, String nombrePrenda, int stock, Material material, int cantMaterial)
@@ -87,7 +80,6 @@ public class SistemaIndumentaria
 	
 	public void ControlarStockMateriales()
 	{
-		System.out.println("Here");
 		for (int i = 0; i < materiales.size(); i++) {
 			Material mat = materiales.elementAt(i);
 			if(mat.getCantStock() <= mat.getPuntoDeReposicion())
@@ -95,28 +87,80 @@ public class SistemaIndumentaria
 				materialesAPedir.add(mat);
 			}
 		}
-		System.out.println(materialesAPedir);
 		if(materialesAPedir.size()>0)
 		{
 			Vector<Material>aux;
 			aux = new Vector<Material>();
-			boolean flag = true;
-			while(flag)
+			aux.add(materialesAPedir.elementAt(0));
+			materialesAPedir.removeElementAt(0);
+			int count = 0;
+			while(aux.size() > 0)
 			{
-				for (int i = 0; i < materialesAPedir.size(); i++) 
+				for (int i = 0; i < materialesAPedir.size(); i++)
 				{
-					System.out.println(materialesAPedir);
-					Material mat = materiales.elementAt(i);
-					if(i == 0 || mat.getProveedor().getCodigoProveedor() == aux.elementAt(0).getProveedor().getCodigoProveedor())
+					Material mat = materialesAPedir.elementAt(i);
+					if(mat.getProveedor().getCodigoProveedor() == aux.elementAt(0).getProveedor().getCodigoProveedor())
 					{
-						//aux.add(mat);
+						aux.add(mat);
 						materialesAPedir.removeElementAt(i);
-						System.out.println(materialesAPedir);
-						System.out.println(mat.getCodigoMaterial());
+						i--;
 					}
 				}
-				flag = false;
+				// Crear Orden de compra
+				this.generarOrdenDeCompra(aux);
+				count++;
+				aux.removeAllElements();
+				if(materialesAPedir.size() > 0)
+				{
+					aux.add(materialesAPedir.elementAt(0));
+					materialesAPedir.removeElementAt(0);
+				}
 			}
+			System.out.println("Se generaron: "+count+" ordenes de compras");
+		}
+	}
+	
+	public void generarOrdenDeCompra(Vector<Material> materiales)
+	{
+		Vector<itemOC>itemocs;
+		itemocs = new Vector<itemOC>();
+		for (int i = 0; i < materiales.size(); i++) {
+			Material mat = materiales.elementAt(i);
+			itemOC itemOc = new itemOC(mat, mat.getCantidadAPedir());
+			itemocs.add(itemOc);
+		}
+		// El codigo de la orden de compra (ordenesDeCompra.size()) ira aumentando 1,2,3.. secuencialmente.
+		ordenDeCompra orden = new ordenDeCompra(ordenesDeCompra.size()+1, "Hoy",itemocs);
+		ordenesDeCompra.add(orden);
+	}
+	
+	public void ListarOrdenesDeCompra() {
+		// Faltaria chequear si las ordenes de compra son del mismo proveedor
+		if(ordenesDeCompra.size() > 0)
+		{
+			System.out.println("Ordenes de compras:");
+			for (int i = 0; i < ordenesDeCompra.size(); i++) {
+				ordenDeCompra orden = ordenesDeCompra.elementAt(i);
+				Vector<itemOC> items = orden.getItemsOCs();
+				System.out.println("------------------");
+				System.out.println("Fecha: "+orden.getFechaOC());
+				System.out.println("Codigo: "+orden.getCodigoOC());
+				System.out.println("Materiales a pedir:");
+				for (int j = 0; j < items.size(); j++) {
+					itemOC item = items.elementAt(j);
+					System.out.println("  ----------------");
+					System.out.println(" - Nombre: "+item.getMaterial().getNombreMaterial());
+					System.out.println(" - Cantidad: "+item.getCantPedir());
+					System.out.println("  ----------------");
+				}
+				System.out.println("Proveedor: "+orden.getNombreProveedor());
+				System.out.println("TOTAL: "+orden.getTotalOC());
+				System.out.println("------------------");
+			}
+		}
+		else
+		{
+			System.out.println("No hay ordenes de compra");
 		}
 	}
 	
@@ -170,33 +214,5 @@ public class SistemaIndumentaria
 		Factura nuevaFactura = new Factura(this.contadorFactura, fecha, nombreCliente);
 		return nuevaFactura;
 	}
-	
-	
-	
-	//nuevo claudio
-	//NUEVO CLAUDIO - GENERAR OC	
-	/*
-		public void chequearPtoPedido(){
-			
-			Vector<Material> materialesAux;
-			materialesAux = new Vector<Material>();
-			
-			if(this.buscarMaterialesAPedir() != null){
-				
-				for(int j = 0; j < materialesAPedir.size(); j++){
-					
-					
-					
-				}
-				
-				//this.generarOC(materialesAPedir){
-					
-					
-					
-					
-				}
-				
-			}
-	*/
 	
 }

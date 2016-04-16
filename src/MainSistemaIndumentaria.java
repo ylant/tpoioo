@@ -29,7 +29,9 @@ public class MainSistemaIndumentaria
 		System.out.println("-------------------------------------------------------");
 		System.out.println("1.- ABM Prenda");
 		System.out.println("2.- Venta de Prendas");
-		System.out.println("3.- Listar Ordenes de Compra");
+		System.out.println("3.- Listar Prendas");
+		System.out.println("4.- Chequear punto de reposicion");
+		System.out.println("5.- Listar Ordenes de Compra");
 		System.out.println("9.- Salir");
 		System.out.println("-------------------------------------------------------");
 		System.out.print("Opcion:");
@@ -53,18 +55,33 @@ public class MainSistemaIndumentaria
 			  	}
 			  	case '3' : 
 			  	{
-			//  		this.listarCuentas();
+			  		this.listarPrendas(true);
+			  		break;
+			  	}
+			  	
+			  	case '4' :
+			  	{
+			  		sistemaindumentaria.ControlarStockMateriales();
+			  		this.mostrarMenu();
+			  		break;
+			  	}
+			  	
+			  	case '5' :
+			  	{
+			  		sistemaindumentaria.ListarOrdenesDeCompra();
+			  		this.mostrarMenu();
 			  		break;
 			  	}
 		
 			  	case '9' : 
 			  	{
-			  		//this.salir();
+			  		this.salir();
 			  	}
 		  	}
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 		}
 
 	}
@@ -109,7 +126,6 @@ public class MainSistemaIndumentaria
 			  		this.listarPrendas(true);
 			  		break;
 			  	}
-			  	
 			  	case '9' : 
 			  	{
 			  		this.salir();
@@ -118,6 +134,7 @@ public class MainSistemaIndumentaria
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 		}
 
 	}
@@ -159,14 +176,14 @@ public class MainSistemaIndumentaria
 		  		}
 			  	case '2' : 
 			  	{
-		  		if(	this.AltaPrendaDeTemporada("invierno"))
-		  		{
-		  			System.out.println("###PRENDA GENERADA CORRECTAMENTE###");
-		  		}
-			  	else
-			  	{
-			  		System.out.println("Prenda no se pudo generar");
-			  	}	
+			  		if(	this.AltaPrendaDeTemporada("invierno"))
+			  		{
+			  			System.out.println("###PRENDA GENERADA CORRECTAMENTE###");
+			  		}
+				  	else
+				  	{
+				  		System.out.println("Prenda no se pudo generar");
+				  	}
 		  		break;			  		
 			  	}
 			  	case '3' : 
@@ -218,6 +235,7 @@ public class MainSistemaIndumentaria
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 		}
 
 	}
@@ -231,7 +249,7 @@ public class MainSistemaIndumentaria
 	public boolean AltaPrendaSinTemporada()
 	{
 		int stock, codigo;
-		boolean respuesta, finCargaMateriales=true;
+		boolean finCargaMateriales = true;
 		Prenda prendainstanciada;
 		
 		System.out.println("##### DANDO DE ALTA PRENDA SIN TEMPORADA #####");
@@ -328,12 +346,12 @@ public class MainSistemaIndumentaria
 					finCargaMateriales = false;
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
-		//sistemaindumentaria.ControlarStockMateriales();
+		// Controlar el stock de materiales
+		sistemaindumentaria.ControlarStockMateriales();
 		
 		return true;
 	}
@@ -398,7 +416,6 @@ public class MainSistemaIndumentaria
 				finCargaMateriales = false;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -439,10 +456,12 @@ public class MainSistemaIndumentaria
 					finCargaMateriales = false;
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
+		// Controlar el stock de materiales
+		sistemaindumentaria.ControlarStockMateriales();
 		
 		return true;
 	}
