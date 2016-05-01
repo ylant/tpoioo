@@ -91,4 +91,11 @@ public class Prenda
 		this.calcularPrecio();
 	}
 	
+	//Nuevo metodo derivado de la correccion de la profesora
+	public void baja(){
+		this.codigoPrenda = this.getCodigoPrenda()*-1;
+				
+	}
+	
+	
 }

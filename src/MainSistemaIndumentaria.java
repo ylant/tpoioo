@@ -56,6 +56,7 @@ public class MainSistemaIndumentaria
 			  	case '3' : 
 			  	{
 			  		this.listarPrendas(true);
+			  		this.mostrarMenu();//claguirre
 			  		break;
 			  	}
 			  	
@@ -124,6 +125,7 @@ public class MainSistemaIndumentaria
 			  	case '4' : 
 			  	{
 			  		this.listarPrendas(true);
+			  		this.mostrarMenuABMPrendas();//claguirre
 			  		break;
 			  	}
 			  	case '9' : 
@@ -150,7 +152,7 @@ public class MainSistemaIndumentaria
 		System.out.println("-------------------------------------------------------");
 		System.out.println("1.- Prenda de Verano");
 		System.out.println("2.- Prenda de Invierno");
-		System.out.println("3.- Prenda de Otoï¿½o");
+		System.out.println("3.- Prenda de Otoño");
 		System.out.println("4.- Prenda de Primavera");
 		System.out.println("5.- Prenda sin Temporada");
 		System.out.println("9.- Salir");
@@ -472,31 +474,34 @@ public class MainSistemaIndumentaria
 		System.out.println("-------------------------------------------------------");
 		Vector<Prenda>mostrarprendas;
 		mostrarprendas = sistemaindumentaria.getPrendas();
+		
 		for (int i=0; i<mostrarprendas.size();i++)
 		{
-			if (ventas == true || mostrarprendas.elementAt(i).getStockPrenda() > 0 )
-			{
-			System.out.println("CODIGO: " + mostrarprendas.elementAt(i).getCodigoPrenda() + " NOMBRE: "
-					+ mostrarprendas.elementAt(i).getNombrePrenda() + " STOCK: " 
-					+ mostrarprendas.elementAt(i).getStockPrenda() + " PRECIO: " 
-					+ mostrarprendas.elementAt(i).getPrecioPrenda());
-			}
-			else if (ventas == false)
-			{
+			//Ahora controlo que el codigo no este dado de baja
+			if(mostrarprendas.elementAt(i).getCodigoPrenda()>0){
+				if (ventas == true || mostrarprendas.elementAt(i).getStockPrenda() > 0)	
+				{
 				System.out.println("CODIGO: " + mostrarprendas.elementAt(i).getCodigoPrenda() + " NOMBRE: "
 						+ mostrarprendas.elementAt(i).getNombrePrenda() + " STOCK: " 
 						+ mostrarprendas.elementAt(i).getStockPrenda() + " PRECIO: " 
 						+ mostrarprendas.elementAt(i).getPrecioPrenda());
-			}
-
-		}
+				}
+				else if (ventas == false)
+				{
+					System.out.println("CODIGO: " + mostrarprendas.elementAt(i).getCodigoPrenda() + " NOMBRE: "
+							+ mostrarprendas.elementAt(i).getNombrePrenda() + " STOCK: " 
+							+ mostrarprendas.elementAt(i).getStockPrenda() + " PRECIO: " 
+							+ mostrarprendas.elementAt(i).getPrecioPrenda());
+				}
+			} //if(mostrarprendas.elementAt(i).getCodigoPrenda()>0)
+		} //for (int i=0; i<mostrarprendas.size();i++)
 		System.out.println("-------------------------------------------------------");
-
 	}
 
 	public void bajaPrenda()
 	{
-		int stock, codigo;
+		//int stock, codigo; -> No usamos stock en este metodo
+		int codigo;
 		boolean respuesta;
 		
 		System.out.println("##### DANDO DE BAJA PRENDA DE TEMPORADA #####");

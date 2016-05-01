@@ -23,12 +23,12 @@ public class SistemaIndumentaria
 
 		Prenda prenda_sin_temporada3 = this.AltaPrendaSinTemporada(20, "pantalon1", 10, material1, 65);
 		prenda_sin_temporada3.setPrecioPrenda(200);
-		prendas.add(prenda_sin_temporada3);
+	//	prendas.add(prenda_sin_temporada3); el metodo altaprendasintemporada ya realiza un add
 		
 		Prenda prenda_sin_temporada2 = this.AltaPrendaSinTemporada(10, "pantalon2", 10, material2, 75);
 		prenda_sin_temporada2.setPrecioPrenda(400);
 
-		prendas.add(prenda_sin_temporada2);
+	//	prendas.add(prenda_sin_temporada2); el metodo altaprendasintemporada ya realiza un add
 	}
 	
 	public SistemaIndumentaria()
@@ -204,7 +204,8 @@ public class SistemaIndumentaria
 		prendainstanciada = this.buscarPrenda(codigo);
 		if (prendainstanciada == null)
 			return false;
-		prendainstanciada.setCodigoPrenda(prendainstanciada.getCodigoPrenda() * -1);
+		//prendainstanciada.setCodigoPrenda(prendainstanciada.getCodigoPrenda() * -1);
+		prendainstanciada.baja(); //segun el nuevo grafico la prenda se da de baja ella sola... es una groza
 		return true;
 	}
 	
