@@ -89,9 +89,8 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame
 							jMenuPrendasItemAlta.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) 
 								{
-//									Alta Prenda
-
-									
+									VentanaOpcionAltaPrenda vtnAltaPrenda = new VentanaOpcionAltaPrenda(sistemaIndumentaria);
+									vtnAltaPrenda.setVisible(true);									
 								}
 							});
 						}
