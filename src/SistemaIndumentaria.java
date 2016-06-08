@@ -193,7 +193,13 @@ public class SistemaIndumentaria
 	public Vector<Prenda> getPrendas() {
 		return prendas;
 	}
-
+	
+	//Nuevo CAGUIRRE
+	public Vector<Material> getMateriales() {
+		return materiales;
+	}	
+	
+	
 	public void setPrendas(Vector<Prenda> prendas) {
 		this.prendas = prendas;
 	}

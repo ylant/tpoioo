@@ -47,7 +47,8 @@ public class VentanaOpcionAltaPrenda extends JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						System.exit(0);//Ventana Alta Prenda Temporada 
+						VentanaAltaPrenda vtnAltaPrendaTemp = new VentanaAltaPrenda(sistemaIndumentaria, true);
+						vtnAltaPrendaTemp.setVisible(true); 
 					}
 				});				
 			}
@@ -61,7 +62,8 @@ public class VentanaOpcionAltaPrenda extends JFrame {
 				{
 					public void actionPerformed(ActionEvent evt) 
 					{
-						System.exit(0);//Ventana Alta Prenda Temporada 
+						VentanaAltaPrenda vtnAltaPrendaTemp = new VentanaAltaPrenda(sistemaIndumentaria, false);
+						vtnAltaPrendaTemp.setVisible(true); 
 					}
 				});				
 			}
