@@ -13,12 +13,12 @@ public class MainSistemaIndumentaria
 		sistemaindumentaria = new SistemaIndumentaria();
 	}
 	
-	public static void main(String[] args) 
+	/*public static void main(String[] args) 
 	{
 		MainSistemaIndumentaria sistema = new MainSistemaIndumentaria();
 		sistema.mostrarMenu();
 
-	}
+	}*/
 
 	public void mostrarMenu() 
 	{
@@ -119,7 +119,7 @@ public class MainSistemaIndumentaria
 			  	}
 			  	case '3' : 
 			  	{
-			  		this.modificarPrenda();
+			  		this.modificarPrenda2();
 			  		break;
 			  	}
 			  	case '4' : 
@@ -617,7 +617,32 @@ public class MainSistemaIndumentaria
 		
 		return true;
 	}
+	
+	public boolean modificarPrenda2(){
+		
+		int codigoPrenda;
+		int stockPrenda;
+		String nombrePrenda;
+		String temporadaPrenda;
+		
+		System.out.print("Ingrese el codigo de la prenda");
+		Scanner ScanCodigo = new Scanner(System.in);
+		String strCodigo = ScanCodigo.nextLine();
+		codigoPrenda = Integer.parseInt(strCodigo);
+		
+		if(sistemaindumentaria.buscarPrenda(codigoPrenda) != null){
 
+			
+		}else{
+			
+			System.out.println("Prenda no encontrada");
+			this.mostrarMenuABMPrendas();
+		}
+		
+		return true;		
+	}
+	
+	
 	public boolean ventaPrendas() 
 	{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

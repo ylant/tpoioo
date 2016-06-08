@@ -198,6 +198,13 @@ public class SistemaIndumentaria
 		this.prendas = prendas;
 	}
 	
+	public Factura generarFactura(int nroFactura, String fecha, String nombreCliente)
+	{
+		this.contadorFactura = this.contadorFactura + 1;
+		Factura nuevaFactura = new Factura(this.contadorFactura, fecha, nombreCliente);
+		return nuevaFactura;
+	}
+	
 	public boolean bajaPrenda(int codigo)
 	{
 		Prenda prendainstanciada;
@@ -209,11 +216,8 @@ public class SistemaIndumentaria
 		return true;
 	}
 	
-	public Factura generarFactura(int nroFactura, String fecha, String nombreCliente)
-	{
-		this.contadorFactura = this.contadorFactura + 1;
-		Factura nuevaFactura = new Factura(this.contadorFactura, fecha, nombreCliente);
-		return nuevaFactura;
+	public void modificarPrenda(){
+		
 	}
 	
 }
