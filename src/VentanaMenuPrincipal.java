@@ -20,7 +20,9 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame
 	private JMenuBar jBarradeMenues;
 	private JMenu jMenuVenderPrendas;
 	private JMenu jMenuPrendas;
-	private JMenuItem jMenuPrendasItemAlta;
+	private JMenu jMenuPrendasAlta;
+	private JMenuItem jMenuPrendasAltaItemPrendaTemp;
+	private JMenuItem jMenuPrendasAltaItemPrendaSinTemp;
 	private JMenuItem jMenuPrendasItemBaja;
 	private JMenuItem jMenuPrendasItemModificacion;
 	private JMenu jMenuListados;
@@ -51,12 +53,72 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame
 			{
 				jBarradeMenues = new JMenuBar();
 				setJMenuBar(jBarradeMenues);
-				jBarradeMenues.setPreferredSize(new java.awt.Dimension(500, 22));
-				{					
+				jBarradeMenues.setPreferredSize(new java.awt.Dimension(800, 22));
+				{						
+					{//Menu - ABM Prendas
+
+						jMenuPrendas = new JMenu();
+						jBarradeMenues.add(jMenuPrendas);
+						jMenuPrendas.setText("ABM Prendas");
+						//Segundo nivel de Menu	
+						{	
+							//Menu - Ata
+							jMenuPrendasAlta = new JMenu();
+							jMenuPrendas.add(jMenuPrendasAlta);
+							jMenuPrendasAlta.setText("Alta");							
+							{ //Tercer nivel de Menu
+								jMenuPrendasAltaItemPrendaTemp = new JMenuItem("Prenda Temp.");
+								jMenuPrendasAlta.add(jMenuPrendasAltaItemPrendaTemp);
+								jMenuPrendasAltaItemPrendaTemp.addActionListener(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent evt) {
+										// TODO Auto-generated method stub
+										
+									}
+								}); //Prenda Temporada
+								
+								jMenuPrendasAltaItemPrendaSinTemp = new JMenuItem("Sin Temp.");
+								jMenuPrendasAlta.add(jMenuPrendasAltaItemPrendaSinTemp);
+								jMenuPrendasAltaItemPrendaSinTemp.addActionListener(new ActionListener() {
+									
+									@Override
+									public void actionPerformed(ActionEvent evt) {
+										// TODO Auto-generated method stub
+										
+									}
+								}); //Prenda Sin Temporada
+							} //Alta Prenda
+							
+							//Menu - Baja
+							jMenuPrendasItemBaja = new JMenuItem();
+							jMenuPrendas.add(jMenuPrendasItemBaja);
+							jMenuPrendasItemBaja.setText("Baja Prenda");
+							jMenuPrendasItemBaja.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) 
+								{
+//										Baja Prenda
+								}
+							});
+												
+						
+							//Menu - Modificacion
+							jMenuPrendasItemModificacion = new JMenuItem();
+							jMenuPrendas.add(jMenuPrendasItemModificacion);
+							jMenuPrendasItemModificacion.setText("Modificar Prenda");
+							jMenuPrendasItemModificacion.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) 
+								{
+//									Modificar Prenda;
+								}
+							});
+						}
+					}//FIN Menu - 	ABM Prendas
+
 					{//Menu - Vender Prendas
 					jMenuVenderPrendas = new JMenu();
 					jBarradeMenues.add(jMenuVenderPrendas);
-					jMenuVenderPrendas.setText("Vender Prendas");
+					jMenuVenderPrendas.setText("Venta Prenda");
 					jMenuVenderPrendas.addMenuListener(new MenuListener() {
 							public void menuSelected(MenuEvent evt) {
 								//Vender prendas
@@ -68,63 +130,13 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame
 								
 							}
 						});
-					}//FIN Menu - Vender Prendas
+					}//FIN Menu - Vender Prendas					
 					
-					{//Menu - ABM Prendas
-
-						jMenuPrendas = new JMenu();
-						jBarradeMenues.add(jMenuPrendas);
-						jMenuPrendas.setText("ABM Prendas");
-						//jMenuPrendas.setPreferredSize(new java.awt.Dimension(85, 21));
-						jMenuPrendas.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent evt) 
-							{
-								
-							}
-						});
-						{
-							jMenuPrendasItemAlta = new JMenuItem();
-							jMenuPrendas.add(jMenuPrendasItemAlta);
-							jMenuPrendasItemAlta.setText("Alta Prenda");
-							jMenuPrendasItemAlta.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent evt) 
-								{
-									VentanaOpcionAltaPrenda vtnOpcAltaPrenda = new VentanaOpcionAltaPrenda(sistemaIndumentaria);
-									vtnOpcAltaPrenda.setVisible(true);									
-								}
-							});
-						}
-						{
-							jMenuPrendasItemBaja = new JMenuItem();
-							jMenuPrendas.add(jMenuPrendasItemBaja);
-							jMenuPrendasItemBaja.setText("Baja Prenda");
-							jMenuPrendasItemBaja.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent evt) 
-								{
-//									Baja Prenda
-								}
-							});
-						}
-						{
-							jMenuPrendasItemModificacion = new JMenuItem();
-							jMenuPrendas.add(jMenuPrendasItemModificacion);
-							jMenuPrendasItemModificacion.setText("Modificar Prenda");
-							jMenuPrendasItemModificacion.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent evt) 
-								{
-//									Modificar Prenda;
-								}
-							});
-						}						
-
-					}//FIN Menu - 	ABM Prendas
-									
 					{//Menu - Listados
 
 						jMenuListados = new JMenu();
 						jBarradeMenues.add(jMenuListados);
 						jMenuListados.setText("Listados");
-						//jMenuListados.setPreferredSize(new java.awt.Dimension(75, 21));
 						jMenuListados.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent evt) 
 							{
@@ -134,7 +146,7 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame
 						{
 							jMenuListadosItemListarPrendas = new JMenuItem();
 							jMenuListados.add(jMenuListadosItemListarPrendas);
-							jMenuListadosItemListarPrendas.setText("Listar Prendas");
+							jMenuListadosItemListarPrendas.setText("Prendas");
 							jMenuListadosItemListarPrendas.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) 
 								{
@@ -146,7 +158,7 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame
 						{
 							jMenuListadosItemListarOCs = new JMenuItem();
 							jMenuListados.add(jMenuListadosItemListarOCs);
-							jMenuListadosItemListarOCs.setText("Listar O.C");
+							jMenuListadosItemListarOCs.setText("Ordenes de Compra");
 							jMenuListadosItemListarOCs.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) 
 								{
