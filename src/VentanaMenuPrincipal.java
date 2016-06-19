@@ -1,5 +1,8 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -121,7 +124,12 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame
 					jMenuVenderPrendas.setText("Venta Prenda");
 					jMenuVenderPrendas.addMenuListener(new MenuListener() {
 							public void menuSelected(MenuEvent evt) {
-								//Vender prendas
+								VentanaVentaPrenda ventana = new VentanaVentaPrenda(sistemaIndumentaria);
+								ventana.setTitle("Venta de Prendas");
+								ventana.setSize(500, 500);
+								ventana.setMaximumSize(new Dimension(500, 500));
+								ventana.setMinimumSize(new Dimension(500, 500));
+								ventana.setVisible(true);
 							}
 							public void menuDeselected(MenuEvent evt) {
 								

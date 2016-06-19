@@ -7,7 +7,7 @@ public class SistemaIndumentaria
 	private Vector<Proveedor>proveedores;
 	private Vector<Material>materialesAPedir;
 	private Vector<ordenDeCompra>ordenesDeCompra;
-	private int contadorFactura=0;
+	private Vector<Factura>facturas;
 	
 	private void cargaInicial()
 	{
@@ -38,6 +38,7 @@ public class SistemaIndumentaria
 		proveedores = new Vector<Proveedor>();
 		materialesAPedir = new Vector<Material>();
 		ordenesDeCompra = new Vector<ordenDeCompra>();
+		facturas = new Vector<Factura>();
 		cargaInicial();
 	}
 	
@@ -204,11 +205,41 @@ public class SistemaIndumentaria
 		this.prendas = prendas;
 	}
 	
-	public Factura generarFactura(int nroFactura, String fecha, String nombreCliente)
+	public int generarFactura(int numeroCliente, String nombreCliente)
 	{
-		this.contadorFactura = this.contadorFactura + 1;
-		Factura nuevaFactura = new Factura(this.contadorFactura, fecha, nombreCliente);
-		return nuevaFactura;
+		int numeroFactura = facturas.size()+1;
+		Factura nuevaFactura = new Factura(numeroFactura, numeroCliente, nombreCliente);
+		facturas.add(nuevaFactura);
+		return nuevaFactura.getNroFactura();
+	}
+
+	public Factura buscarFactura(int numFactura){
+		if(facturas.size() > 0){
+			for (int i = 0; i < facturas.size(); i++) {
+				if(numFactura == facturas.elementAt(i).getNroFactura()){
+					return facturas.elementAt(i);
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void eliminarFactura(Factura factura){
+		if(facturas.size()>0){
+			int nroFac = factura.getNroFactura();
+			for (int i = 0; i < facturas.size(); i++) {
+				if(nroFac == facturas.elementAt(i).getNroFactura()){
+					facturas.removeElementAt(i);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void agregarPrenda(int codfac, int codPrenda, int cantidad) {
+		Factura fac = buscarFactura(codfac);
+		Prenda prenda = buscarPrenda(codPrenda);
+		fac.incorporarItemFactura(cantidad, prenda);
 	}
 	
 	public boolean bajaPrenda(int codigo)
@@ -218,7 +249,7 @@ public class SistemaIndumentaria
 		if (prendainstanciada == null)
 			return false;
 		//prendainstanciada.setCodigoPrenda(prendainstanciada.getCodigoPrenda() * -1);
-		prendainstanciada.baja(); //segun el nuevo grafico la prenda se da de baja ella sola... es una groza
+		prendainstanciada.baja();
 		return true;
 	}
 	

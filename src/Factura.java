@@ -5,6 +5,7 @@ public class Factura
 	private int nroFactura;
 	private String nombreLocal="LA SALADA";
 	private String nombreCliente;
+	private int numCliente;
 
 	private Date fecha;
 	private float precioTotal;
@@ -20,15 +21,15 @@ public class Factura
 	}
 
 
-	public Factura(int nroFactura, String fecha, String nombreCliente) 
+	public Factura(int nroFactura, int numCliente, String nombreCliente) 
 	{
 		super();
-		Date fechaactual = new Date();
 		this.nroFactura = nroFactura;
 		this.nombreCliente = nombreCliente;
-		this.fecha = fechaactual;
+		this.fecha = new Date();
+		this.numCliente = numCliente;
 		itemfacturas = new Vector<itemFactura>();
-
+		
 	}
 	
 	
@@ -67,13 +68,24 @@ public class Factura
 		this.precioTotal = precioTotal;
 	}
 	
-	
 	public void incorporarItemFactura(int cantidadComprada, Prenda prenda)
 	{
+		if(itemfacturas.size() > 0){
+			for (int i = 0; i < itemfacturas.size(); i++) {
+				if(itemfacturas.elementAt(i).getPrenda().getCodigoPrenda() == prenda.getCodigoPrenda()){
+					itemfacturas.elementAt(i).setCantidadComprada(cantidadComprada);
+					break;
+				} else if(i+1 == itemfacturas.size()){
+					itemFactura itemfc = new itemFactura(cantidadComprada, prenda);
+					this.itemfacturas.add(itemfc);
+				}
+			}
+		} else {
+			itemFactura itemfc = new itemFactura(cantidadComprada, prenda);
+			this.itemfacturas.add(itemfc);
+		}
 		prenda.setStockPrenda(prenda.getStockPrenda()-cantidadComprada);
-		itemFactura itemfactura = new itemFactura(cantidadComprada, prenda);
 		this.setPrecioTotal(this.getPrecioTotal()+(cantidadComprada * prenda.getPrecioPrenda()));
-		this.itemfacturas.add(itemfactura);
 	}
 
 }
