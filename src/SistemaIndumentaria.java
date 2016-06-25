@@ -23,6 +23,7 @@ public class SistemaIndumentaria
 
 		Prenda prenda_sin_temporada3 = this.AltaPrendaSinTemporada(20, "pantalon1", 10, material1, 65);
 		prenda_sin_temporada3.setPrecioPrenda(200);
+		ControlarStockMateriales();
 	//	prendas.add(prenda_sin_temporada3); el metodo altaprendasintemporada ya realiza un add
 		
 		Prenda prenda_sin_temporada2 = this.AltaPrendaSinTemporada(10, "pantalon2", 10, material2, 75);
@@ -257,4 +258,38 @@ public class SistemaIndumentaria
 		
 	}
 	
+	public Vector<Vector> getOC() 
+	{
+		
+		 Vector<Vector> filas = new Vector<Vector>();
+		 Vector<String> titulo = new Vector<String>();
+		 String codigot = "Codigo:";
+		 String fechat = "Fecha:";
+		 String totalt = "Total:";
+		 String proveedort = "Proveedor:";
+		titulo.add(codigot);
+		titulo.add(fechat);
+		titulo.add(totalt);
+		titulo.add(proveedort);
+		filas.add(titulo);
+		 for (int i = 0; i < ordenesDeCompra.size(); i++) {
+				ordenDeCompra ordenDecompra = ordenesDeCompra.elementAt(i);
+				int codigo = ordenDecompra.getCodigoOC();
+				String fecha = ordenDecompra.getFechaOC();
+				float total = ordenDecompra.getTotalOC();
+				String proveedor = ordenDecompra.getNombreProveedor();
+				Vector<String> aux = new Vector<String>();
+				aux.add(Integer.toString(codigo));
+				aux.add(fecha);
+				aux.add(Float.toString(total));
+				aux.add(proveedor);
+				filas.add(aux);
+		
+				
+			}
+	
+		
+	
+		return filas;
+	}
 }

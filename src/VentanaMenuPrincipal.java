@@ -170,7 +170,8 @@ public class VentanaMenuPrincipal extends javax.swing.JFrame
 							jMenuListadosItemListarOCs.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) 
 								{
-//									Listar O.C
+									VentanaOC ventanaoc = new VentanaOC();
+									ventanaoc.setVisible(true);
 								}
 							});
 						}	
